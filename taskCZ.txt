@@ -1,0 +1,54 @@
+= File manager
+Autor: Elnar Yantay
+== Zadání
+
+
+Program na správu souborů/adresářů (inspirace Midnight Commander).
+
+Implementujte následující funkcionalitu:
+
+1.    vytváření a mazání souborů/adresářů/symbolických linků ...
+2.    kopírování a přesun souborů/adresářů/symbolických linků ...
+3.    možnost provádět předchozí operace nad množinou soborů definovaných regulárním výrazem
+4.    navigace mezi jednotlivými adresáři
+5.    uživatelské rozhraní: zobrazení adresářů nad kterými se pracuje a vizuální rozlišení souborů/adresářů/symbolických linků ...
+6.    nepoužívejte funkci system, využijte místo toho systémové knihovny unistd.h, dirent.h, stat.h a další
+
+Dobrovolné možné rozšíření:
+
+ -  dva panely uživatelského rozhraní
+ -  GUI
+
+Použití polymorfismu (doporučené):
+
+ -  operace se soubory
+ -  typy souborů
+ -  uživatelské rozhraní
+ == Specifikace
+ Implementován jednoduchý správce souborů, kde uživatel může spravovat soubory pomocí příkazů.
+Po spuštění program začne pracovat v aktuálním adresáři.
+- "help" vyvolání menu s popisem příkazů.
+- "cd" pohyb v systému souborů.
+- "remove [target]" smazání souborů/adresářů/symbolických linků, podpora jednoduchých regulárních výrazů.
+- "create[name]" vytváření souborů/adresářů/symbolických linků, adresařů nebo sy podpora jednoduchého brace expansionu.
+- "copy [source] [target]" kopírování, podpora jednoduchých regulárních výrazů.
+- "move [from] [to]" pohyb souborů/adresářů/symbolických linků, podpora jednoduchých regulárních výrazů.
+- "quit ukončení programu.
+- "change mod" - změna rozhraní"
+Hlavní rozhraní bude vypadat jako seznam souborů:
+...
+name		type	size
+some.txt	file	22KB
+...
+Extended rozhraní bude vypadat jako seznam souborů:
+...
+name		type	size	modify time
+some.txt	file	22KB	weekday month day hh:mm:ss year
+...
+
+== Polymorfismus
+Polymorfismus je aplikovaný v rámci hierarchie tříd `CAction`, který má 7 potomků `CTouch`, `CMakeDir`,`CLink`, `CRemove`, `CCopy`, `CMove`, `CMoving`. Třída `CAction` má polymorfní metody `Do` a `DoSpecial`  , která si vyžadá od konkrétní implementace akce činnost.
+A také v používání změny rozhraní třid 'CInterface' a souborů CFile.S
+
+
+
